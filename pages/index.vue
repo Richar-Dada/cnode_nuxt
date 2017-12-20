@@ -4,11 +4,6 @@
     <h1 class="title">
       USERS
     </h1>
-    <mu-appbar title="Title is a titile">
-      <mu-icon-button icon="menu" slot="left"/>
-      <mu-flat-button label="expand_more" slot="right"/>
-      <mu-icon-button icon="expand_more" slot="right"/>
-    </mu-appbar>
     <ul class="users">
       <li v-for="(user, index) in users" :key="index" class="user">
         <nuxt-link :to="{ name: 'id', params: { id: index }}">

@@ -1,10 +1,16 @@
 <template>
   <div>
-    <mu-appbar title="Title">
-      <mu-icon-button icon="menu" slot="left"/>
+    <mu-appbar title="Cnode" class="title">
+      <mu-icon-button icon="menu" slot="left" @click="toggle()"/>
       <mu-flat-button label="expand_more" slot="right"/>
-      <mu-icon-button icon="expand_more" slot="right"/>
     </mu-appbar>
+    <mu-drawer :open="open" :docked="false" @close="toggle()">
+      <mu-list @itemClick="toggle()">
+        <mu-list-item title="Menu Item 1"/>
+        <mu-list-item title="Menu Item 2"/>
+        <mu-list-item title="Menu Item 3"/>
+      </mu-list>
+    </mu-drawer>
     <nuxt/>
     <my-footer/>
   </div>
@@ -16,6 +22,16 @@ import MyFooter from '~/components/Footer.vue'
 export default {
   components: {
     MyFooter
+  },
+  data () {
+    return {
+      open: false
+    }
+  },
+  methods: {
+    toggle (flag) {
+      this.open = !this.open
+    }
   }
 }
 </script>
@@ -49,9 +65,6 @@ export default {
 
 .title
 {
-  color: #000;
-  font-weight: 300;
-  font-size: 2.5em;
-  margin: 0;
+  background-color: #444;
 }
 </style>
