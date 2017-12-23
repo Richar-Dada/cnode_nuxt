@@ -56,7 +56,7 @@ export default {
       location.href = `/?tab=${tab}&page=${this.page}`
     },
     handleClick (newIndex) {
-
+      location.href = `/?tab=${this.tab}&page=${newIndex}`
     }
   },
   created () {
