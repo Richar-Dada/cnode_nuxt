@@ -4,28 +4,27 @@
       <mu-list>
         <mu-sub-header class="index-sub-header">
           <ul class="index-title">
-            <li class="index-title-item"><a href="/all">首页</a></li>
-            <li class="index-title-item"><a href="/good">精华</a></li>
-            <li class="index-title-item"><a href="/share">分享</a></li>
-            <li class="index-title-item"><a href="/ask">问答</a></li>
-            <li class="index-title-item"><a href="/job">招聘</a></li>
-            <li class="index-title-item"><a href="/dev">测试</a></li>
+            <li class="index-title-item" @click="goto('all')">首页</li>
+            <li class="index-title-item" @click="goto('good')">精华</li>
+            <li class="index-title-item" @click="goto('share')">分享</li>
+            <li class="index-title-item" @click="goto('ask')">问答</li>
+            <li class="index-title-item" @click="goto('job')">招聘</li>
+            <li class="index-title-item" @click="goto('dev')">测试</li>
           </ul>
         </mu-sub-header>
-        <mu-list-item title="这个周末一起吃饭么?" v-for="news in newsList" :key="news.id">
-          <mu-avatar src="/images/avatar1.jpg" slot="leftAvatar"/>
-          <span slot="describe">
-            <span style="color: rgba(0, 0, 0, .87)">Myron Liu -</span> 周末要来你这里出差，要不要一起吃个饭呀，实在编不下去了,哈哈哈哈哈哈
-          </span>
-          <mu-icon-menu slot="right" icon="more_vert" tooltip="操作">
-            <mu-menu-item title="回复" />
-            <mu-menu-item title="标记" />
-            <mu-menu-item title="删除" />
-          </mu-icon-menu>
-        </mu-list-item>
-        <mu-divider inset/>
+        <div v-for="(news, index) in newsList" :key="news.id">
+          <mu-list-item :title="news.title" class="index-list-item">
+            <mu-avatar :src="news.author.avatar_url" slot="leftAvatar"/>
+            <span slot="describe">
+              <span style="color: rgba(0, 0, 0, .87)">{{ news.author.loginname }} -</span> {{ news.create_at.slice(0, 10) }}
+            </span>
+          </mu-list-item>
+          <mu-divider v-if="index != newsList.length - 1" inset/>
+        </div>
       </mu-list>
     </mobile-tear-sheet>
+    <mu-pagination :total="total" :current="current" @pageChange="handleClick">
+    </mu-pagination>
   </section>
 </template>
 
@@ -38,13 +37,26 @@ export default {
       title: 'Cnode'
     }
   },
-  fetch ({ store, params }) {
-    console.log(params)
-    return store.dispatch('FETCH_NEWS_LIST_DATA', params.id)
+  fetch ({ query, store, params }) {
+    this.tab = query.tab
+    this.page = query.page
+    return store.dispatch('FETCH_NEWS_LIST_DATA', query)
   },
   data () {
     return {
-      newsList: this.$store.getters.getNewsList
+      newsList: this.$store.getters.getNewsList,
+      tab: 'all',
+      page: 1,
+      total: 500,
+      current: 1
+    }
+  },
+  methods: {
+    goto (tab) {
+      location.href = `/?tab=${tab}&page=${this.page}`
+    },
+    handleClick (newIndex) {
+
     }
   },
   created () {
@@ -54,6 +66,9 @@ export default {
 </script>
 
 <style scoped>
+  .container{
+    padding-bottom: 20px;
+  }
   .index-sub-header{
     padding-left: 0;
   }
@@ -66,9 +81,15 @@ export default {
   }
   .index-title-item{
     flex: 1;
-    list-style-type:none
-  }
-  .index-title-item a{
+    list-style-type:none;
     color: #80bd01;
+    cursor: pointer;
+  }
+  .index-title-item{
+    color: #80bd01;
+  }
+  .index-list-item{
+    text-align: left;
+    line-height: 20px;
   }
 </style>
