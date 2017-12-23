@@ -1,16 +1,6 @@
 <template>
   <div>
-    <mu-appbar title="Cnode" class="title">
-      <mu-icon-button icon="menu" slot="left" @click="toggle()"/>
-      <mu-flat-button label="expand_more" slot="right"/>
-    </mu-appbar>
-    <mu-drawer :open="open" :docked="false" @close="toggle()">
-      <mu-list @itemClick="toggle()">
-        <mu-list-item title="Menu Item 1"/>
-        <mu-list-item title="Menu Item 2"/>
-        <mu-list-item title="Menu Item 3"/>
-      </mu-list>
-    </mu-drawer>
+    <my-header/>
     <nuxt/>
     <my-footer/>
   </div>
@@ -18,20 +8,12 @@
 
 <script>
 import MyFooter from '~/components/Footer.vue'
+import MyHeader from '~/components/Header.vue'
 
 export default {
   components: {
-    MyFooter
-  },
-  data () {
-    return {
-      open: false
-    }
-  },
-  methods: {
-    toggle (flag) {
-      this.open = !this.open
-    }
+    MyFooter,
+    MyHeader
   }
 }
 </script>
@@ -41,7 +23,6 @@ export default {
 {
   margin: 0;
   width: 100%;
-  padding: 100px 0;
   text-align: center;
 }
 
@@ -62,9 +43,7 @@ export default {
   color: #fff;
   background-color: #000;
 }
-
-.title
-{
-  background-color: #444;
+.mu-pagination-item.active{
+    background-color: #80bd01;
 }
 </style>

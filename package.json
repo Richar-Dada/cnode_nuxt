@@ -17,7 +17,8 @@
     "express": "^4.15.3",
     "muse-ui": "^2.1.0",
     "nuxt": "^1.0.0-rc3",
-    "source-map-support": "^0.4.15"
+    "source-map-support": "^0.4.15",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
