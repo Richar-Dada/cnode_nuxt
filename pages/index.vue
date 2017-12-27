@@ -12,7 +12,7 @@
             <li class="index-title-item" @click="goto('dev')">测试</li>
           </ul>
         </mu-sub-header>
-        <div v-for="(news, index) in newsList" :key="news.id">
+        <div v-for="(news, index) in newsList" :key="news.id" @click="read(news.id)">
           <mu-list-item :title="news.title" class="index-list-item">
             <mu-avatar :src="news.author.avatar_url" slot="leftAvatar"/>
             <span slot="describe">
@@ -54,6 +54,9 @@ export default {
   methods: {
     goto (tab) {
       location.href = `/?tab=${tab}&page=${this.page}`
+    },
+    read (id) {
+      location.href = `/topic/${id}`
     },
     handleClick (newIndex) {
       location.href = `/?tab=${this.tab}&page=${newIndex}`
