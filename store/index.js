@@ -7,7 +7,8 @@ import getters from './getters'
 export default () => {
   return new Vuex.Store({
     state: {
-      newsList: '12'
+      newsList: '12',
+      token: ''
     },
     actions,
     mutations,

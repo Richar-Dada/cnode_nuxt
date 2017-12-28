@@ -7,6 +7,5 @@ export function fetchNewsList (query) {
 }
 
 export function fetchArticle (id) {
-  console.log(id)
   return axios.get(`https://cnodejs.org/api/v1/topic/${id}`)
 }
