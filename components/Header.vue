@@ -13,13 +13,16 @@
         <a href="/getstart">
           <mu-list-item title="新手入门"/>
         </a>
+        <a href="/publish" v-if="hasLogin">
+          <mu-list-item title="发布话题"/>
+        </a>
         <a href="/api">
           <mu-list-item title="API"/>
         </a>
         <a href="/about">
           <mu-list-item title="关于"/>
         </a>
-        <a href="/signin">
+        <a href="/signin" v-if="!hasLogin">
           <mu-list-item title="登录"/>
         </a>
       </mu-list>
@@ -31,13 +34,17 @@
   export default {
     data () {
       return {
-        open: false
+        open: false,
+        hasLogin: ''
       }
     },
     methods: {
       toggle (flag) {
         this.open = !this.open
       }
+    },
+    mounted () {
+      this.hasLogin = sessionStorage.getItem('token')
     }
   }
 </script>
