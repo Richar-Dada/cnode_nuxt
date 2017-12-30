@@ -28,14 +28,20 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~/assets/css/main.css'],
+  css: [
+    '~/assets/css/main.css',
+    'quill/dist/quill.snow.css',
+    'quill/dist/quill.bubble.css',
+    'quill/dist/quill.core.css'
+    ],
   /*
   ** Add axios globally
   */
   build: {
     vendor: [
       'axios',
-      'muse-ui'
+      'muse-ui',
+      'vue-quill-editor'
     ],
     /*
     ** Run ESLINT on save
@@ -53,6 +59,7 @@ module.exports = {
   },
   plugins: [
     '~/plugins/museui',
-    '~/plugins/vuex-router-sync'
+    '~/plugins/vuex-router-sync',
+    { src: '~/plugins/vue-quill-editor', ssr: false }
   ]
 }

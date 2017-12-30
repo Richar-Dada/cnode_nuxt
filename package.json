@@ -19,6 +19,7 @@
     "muse-ui": "^2.1.0",
     "nuxt": "^1.0.0-rc3",
     "source-map-support": "^0.4.15",
+    "vue-quill-editor": "^3.0.4",
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
