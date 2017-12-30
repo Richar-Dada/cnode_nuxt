@@ -5,7 +5,7 @@
     </div>
     <mu-divider/>
     <div class="title">
-    标题：<mu-auto-complete hintText="" full-width @input="handleInput" :dataSource="dataSource" @change="handlechange" />
+    标题：<mu-auto-complete hintText="" full-width @input="handleInput" @change="handlechange" />
     </div>
     <mu-select-field v-model="tab" :labelFocusClass="['label-foucs']" label="选择板块：">
       <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+  import { createTopic } from '../api/index'
+
   export default {
     name: 'publish',
     data () {
@@ -35,20 +37,23 @@
         console.log(`you choose ${val}`)
       },
       handleInput (val) {
-        this.dataSource = [
-          val,
-          val + val,
-          val + val + val
-        ]
+        this.title = val
       },
-      publish () {
-        // if (!this.content) return
-        // let postData = {
-        //   accesstoken: sessionStorage.getItem('token'),
-        //   title: this.title,
-        //   tab: this.tab,
-        //   content: this.content
-        // }
+      async publish () {
+        if (!this.content) return
+        let postData = {
+          accesstoken: sessionStorage.getItem('token'),
+          title: this.title,
+          tab: 'dev',
+          content: this.content
+        }
+        console.log(this.content)
+        let res = await createTopic(postData)
+        console.log(res)
+        if (res.status === 200) {
+          alert('发布成功')
+          location.href = '/'
+        }
       }
     }
   }

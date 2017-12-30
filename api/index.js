@@ -9,3 +9,7 @@ export function fetchNewsList (query) {
 export function fetchArticle (id) {
   return axios.get(`https://cnodejs.org/api/v1/topic/${id}`)
 }
+
+export function createTopic (topicData) {
+  return axios.post(`https://cnodejs.org/api/v1/topics`, topicData)
+}
